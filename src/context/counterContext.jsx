@@ -2,7 +2,13 @@ import React, { createContext, useEffect, useReducer } from 'react';
 
 export const CounterContext = createContext();
 
-const initialState = { count: 0, counters: [] };
+const initialState = {
+	total: 0,
+	counters: [],
+	totalArchives: 0,
+	archives: [],
+};
+
 const countersExample = [
 	{
 		title: 'Counter Example',
@@ -36,14 +42,30 @@ function reducer(state, action) {
 				JSON.stringify(state.counters)
 			);
 			return { counters: state.counters, ...state };
-		case 'delete':
-			return { count: state.count - 1 };
 		case 'create':
-			return { count: state.count - 1 };
+			return {
+				...state,
+				counters: state.counters,
+				total: state.counters.length,
+			};
 		case 'updateCounters':
-			return { counters: action.counters };
+			return {
+				...state,
+				counters: action.counters,
+				total: action.counters.length,
+			};
+		case 'updateArchiveCounters':
+			return {
+				...state,
+				archives: action.archives,
+				totalArchives: action.archives.length,
+			};
 		case 'deleteCounters':
-			return { counters: [] };
+			return {
+				totalArchives: [],
+				counters: [],
+				...state,
+			};
 		default:
 			throw new Error();
 	}
@@ -65,6 +87,25 @@ export const CounterProvider = (props) => {
 				JSON.stringify(countersExample)
 			);
 			dispatch({ type: 'updateCounters', counters: countersExample });
+		}
+	}, []);
+
+	useEffect(() => {
+		const localcounters = localStorage.getItem('localArchivesCounters');
+		if (localcounters) {
+			dispatch({
+				type: 'updateArchiveCounters',
+				archives: JSON.parse(localcounters),
+			});
+		} else {
+			localStorage.setItem(
+				'localArchiveCounters',
+				JSON.stringify(countersExample)
+			);
+			dispatch({
+				type: 'updateArchiveCounters',
+				archives: countersExample,
+			});
 		}
 	}, []);
 
