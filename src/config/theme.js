@@ -13,6 +13,7 @@ const theme = {
 		orange: '#F59B68',
 		red: '#F85E5D',
 		yellow: '#F2C94C',
+		black: '#000',
 	},
 	fontSize: {
 		size10: '10px',
