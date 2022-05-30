@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import CounterScreen from './components/Counter/Counter';
-import ArchiveScreen from './components/Archive/Archive';
-import CreateScreen from './components/Create/Create';
+import CounterScreen from './pages/Counters';
+import ArchiveScreen from './pages/Archives';
+import CreateScreen from './pages/Create';
 import { CounterProvider } from './context/counterContext';
 
 function App() {
