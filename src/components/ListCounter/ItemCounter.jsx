@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CounterContext } from '../../context/counterContext';
 
@@ -17,6 +18,7 @@ const StyledItem = styled.div`
 `;
 
 const StyledItemBox = styled.div`
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 `;
@@ -59,8 +61,18 @@ const StyledButton = styled.button`
 
 function ItemCounter({ id, title, count }) {
 	const { dispatch } = useContext(CounterContext);
+	let navigate = useNavigate();
+
+	const onHandlerCLick = (event) => {
+		event.preventDefault();
+		if (event.target === event.currentTarget) {
+			console.log('go to counter');
+			navigate(`/counter/${id}`);
+		}
+	};
+
 	return (
-		<StyledItem>
+		<StyledItem onClick={onHandlerCLick}>
 			<StyledItemBox>
 				<StyledItemCount>{count}</StyledItemCount>
 				<StyledItemTitle>{title}</StyledItemTitle>
