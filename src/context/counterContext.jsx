@@ -23,10 +23,18 @@ function reducer(state, action) {
 		case 'increment':
 			let counterIncrement = state.counters[action.id];
 			counterIncrement.count = counterIncrement.count + 1;
+			localStorage.setItem(
+				'localCounters',
+				JSON.stringify(state.counters)
+			);
 			return { counters: state.counters, ...state };
 		case 'decrement':
 			let counterDecrement = state.counters[action.id];
 			counterDecrement.count = counterDecrement.count - 1;
+			localStorage.setItem(
+				'localCounters',
+				JSON.stringify(state.counters)
+			);
 			return { counters: state.counters, ...state };
 		case 'delete':
 			return { count: state.count - 1 };
