@@ -7,12 +7,12 @@ const StyledItem = styled.div`
 	flex-direction: row;
 	align-content: space-between;
 	align-items: center;
-	width: 90%;
+	width: 100%;
 	margin: auto;
 	box-sizing: border-box;
 	padding: 20px;
 	border-radius: 5px;
-	border: 1px solid #dadefb;
+	border: 1px solid ${({ theme }) => theme.colors.gray2};
 `;
 
 const StyledItemBox = styled.div`
@@ -31,7 +31,7 @@ const StyledItemCount = styled.h1`
 	font-size: 2.2rem;
 	font-weight: 800;
 	margin: 0;
-	color: #000;
+	color: ${({ theme }) => theme.colors.black};
 `;
 
 const StyledItemTitle = styled.p`
@@ -42,12 +42,12 @@ const StyledItemTitle = styled.p`
 `;
 
 const StyledButton = styled.button`
-	background-color: #dadefb;
+	background-color: ${({ theme }) => theme.colors.gray2};
 	width: 50px;
 	height: 50px;
 	border-radius: 50px;
 	border: none;
-	color: #000;
+	color: ${({ theme }) => theme.colors.black};
 	outline: none;
 	font-size: 2rem;
 	font-weight: 600;
@@ -66,8 +66,7 @@ function ItemCounter({ id, title, count }) {
 			</StyledItemBox>
 			<StyledItemBoxButton>
 				<StyledButton
-					onClick={() => dispatch({ type: 'increment', id: id })}
-					label='+'>
+					onClick={() => dispatch({ type: 'increment', id: id })}>
 					+
 				</StyledButton>
 				<StyledButton

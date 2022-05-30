@@ -4,6 +4,7 @@ const theme = {
 		grayBlue: '#33617D',
 		darkGray: '#667985',
 		gray4: '#4f4f4f',
+		gray2: '#dadefb',
 		gray1: '#f2f2f2',
 		indigo: '#445ee9',
 		white: '#FFFFFF',
