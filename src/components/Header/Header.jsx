@@ -55,7 +55,7 @@ const StyledHederCounter = styled.p`
 `;
 
 const StyledHederTitle = styled.h1`
-	color: #000;
+	color: ${({ theme }) => theme.colors.black};
 	font-weight: 800;
 	margin-top: 0.2rem;
 	margin-bottom: 0.6rem;
