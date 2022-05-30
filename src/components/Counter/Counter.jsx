@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
-import ListCounter from './ListCounter';
-import { CounterContext } from '../Context/counterContext';
+import ListCounter from '../ListCounter/ListCounter';
+import { CounterContext } from '../../context/counterContext';
 
 function CounterScreen() {
 	const { state } = useContext(CounterContext);

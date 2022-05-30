@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
-import { CounterContext } from '../Context/counterContext';
+import { CounterContext } from '../../context/counterContext';
 
 function ItemCounter({ id, title, count }) {
 	const { dispatch } = useContext(CounterContext);
