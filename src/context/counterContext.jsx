@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useEffect, useReducer } from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 
 export const CounterContext = createContext();
 
@@ -13,18 +13,10 @@ const countersExample = [
 function reducer(state, action) {
 	switch (action.type) {
 		case 'increment':
-			let counterIncrement = state.counters[action.id];
-			counterIncrement = {
-				...counterIncrement,
-				count: counterIncrement.count + 1,
-			};
-			console.log('tetica');
 			return { counters: state.counters, ...state };
 		case 'decrement':
-			console.log('tetica');
 			return { counters: state.counters };
 		case 'updateCounters':
-			console.log('update');
 			return { counters: action.counters };
 		case 'delete':
 			return { count: state.count - 1 };
