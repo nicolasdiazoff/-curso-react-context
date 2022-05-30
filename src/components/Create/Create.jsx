@@ -1,20 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../Header/Header';
 
 function CreateScreen() {
 	return (
-		<>
-			<div>
-				<h1>New One</h1>
-				<nav
-					style={{
-						borderBottom: 'solid 1px',
-						paddingBottom: '1rem',
-					}}>
-					<Link to='/'>Back</Link>
-				</nav>
-			</div>
-		</>
+		<Header title={'New one'} total={0}>
+			<Link to='/'>back to archives</Link>
+		</Header>
 	);
 }
 
