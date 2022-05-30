@@ -9,6 +9,7 @@ const StyledItem = styled.div`
 	align-items: center;
 	width: 100%;
 	margin: auto;
+	margin-bottom: 10px;
 	box-sizing: border-box;
 	padding: 20px;
 	border-radius: 5px;

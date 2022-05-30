@@ -5,7 +5,15 @@ export const CounterContext = createContext();
 const initialState = { count: 0, counters: [] };
 const countersExample = [
 	{
-		title: 'Contador de ejemplo',
+		title: 'Counter Example',
+		count: 0,
+	},
+	{
+		title: 'Counter Example 2',
+		count: 0,
+	},
+	{
+		title: 'Counter Example 3',
 		count: 0,
 	},
 ];
@@ -13,15 +21,21 @@ const countersExample = [
 function reducer(state, action) {
 	switch (action.type) {
 		case 'increment':
+			let counterIncrement = state.counters[action.id];
+			counterIncrement.count = counterIncrement.count + 1;
 			return { counters: state.counters, ...state };
 		case 'decrement':
-			return { counters: state.counters };
-		case 'updateCounters':
-			return { counters: action.counters };
+			let counterDecrement = state.counters[action.id];
+			counterDecrement.count = counterDecrement.count - 1;
+			return { counters: state.counters, ...state };
 		case 'delete':
 			return { count: state.count - 1 };
 		case 'create':
 			return { count: state.count - 1 };
+		case 'updateCounters':
+			return { counters: action.counters };
+		case 'deleteCounters':
+			return { counters: [] };
 		default:
 			throw new Error();
 	}
@@ -45,13 +59,6 @@ export const CounterProvider = (props) => {
 			dispatch({ type: 'updateCounters', counters: countersExample });
 		}
 	}, []);
-
-	// const value = useMemo(() => {
-	// 	return {
-	// 		state,
-	// 		dispatch,
-	// 	};
-	// });
 
 	return <CounterContext.Provider value={{ state, dispatch }} {...props} />;
 };
