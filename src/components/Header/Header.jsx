@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledHeder = styled.div`
 	width: 100%;
-	background-color: #f2f2f2;
+	background-color: ${({ theme }) => theme.colors.gray1};
 	min-height: 0;
 	box-sizing: border-box;
 	padding: 1.2rem;
@@ -25,20 +25,20 @@ const StyledHederBox = styled.div`
 	flex-direction: row;
 	align-items: flex-start;
 	a:nth-child(1) {
-		background-color: #445ee9;
+		background-color: ${({ theme }) => theme.colors.indigo};
 		padding: 0.4rem;
 		padding-left: 1.2rem;
 		padding-right: 1.2rem;
 		text-align: center;
 		border: none;
 		border-radius: 5px;
-		color: #fff;
+		color: ${({ theme }) => theme.colors.white};
 		text-decoration: none;
 	}
 	a:nth-child(2) {
 		margin-left: 4px;
-		background-color: #f2f2f2;
-		color: #445ee9;
+		background-color: ${({ theme }) => theme.colors.gray1};
+		color: ${({ theme }) => theme.colors.indigo};
 		padding: 0.4rem;
 		padding-left: 1.2rem;
 		padding-right: 1.2rem;
@@ -49,7 +49,7 @@ const StyledHederBox = styled.div`
 `;
 
 const StyledHederCounter = styled.p`
-	color: #4f4f4f;
+	color: ${({ theme }) => theme.colors.gray4};
 	margin: 0;
 	font-weight: 600;
 `;
