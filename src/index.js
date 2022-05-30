@@ -4,10 +4,12 @@ import Router from './Router';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from 'styled-components';
 import theme from './config/theme';
+import GlobalStyles from './config/globalStyles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<ThemeProvider theme={theme}>
+		<GlobalStyles />
 		<Router />
 	</ThemeProvider>
 );
