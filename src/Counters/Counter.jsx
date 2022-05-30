@@ -8,16 +8,10 @@ function CounterScreen() {
 	const { state } = useContext(CounterContext);
 	return (
 		<>
-			<Header
-				title={'Counters'}
-				total={0}
-				buttons={
-					<>
-						<Link to='/create'>start new</Link>
-						<Link to='/archive'>see archives</Link>
-					</>
-				}
-			/>
+			<Header title={'Counters'} total={0}>
+				<Link to='/create'>start new</Link>
+				<Link to='/archive'>see archives</Link>
+			</Header>
 			<ListCounter counters={state.counters} />
 		</>
 	);
