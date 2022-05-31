@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { CounterContext } from '../context/counterContext';
 
 const Container = styled.div`
 	display: flex;
@@ -76,23 +77,37 @@ const StyledButton = styled.button`
 `;
 
 function CreateScreen() {
+	const { state, dispatch } = useContext(CounterContext);
+	const [counter, setCounter] = useState({
+		title: 'New Counter',
+		count: 0,
+	});
+
+	const handleIncrement = () => {
+		setCounter({ ...counter, count: counter.count + 1 });
+		dispatch({ type: 'increment', id: counter.id });
+	};
+
+	const handleDecrement = () => {
+		setCounter({ ...counter, count: counter.count - 1 });
+		dispatch({ type: 'decrement', id: counter.id });
+	};
+
+	useEffect(() => {
+		dispatch({ type: 'create' });
+		const newCounter = state.counters[state.counters.length - 1];
+		setCounter({ ...newCounter, id: state.counters.length - 1 });
+	}, []);
+
 	return (
 		<Container>
 			<StyledBigCounter>
-				<StyledBigCounterNumber>100</StyledBigCounterNumber>
+				<StyledBigCounterNumber>{counter.count}</StyledBigCounterNumber>
 				<StyledBigCounterSubtitle>count</StyledBigCounterSubtitle>
 			</StyledBigCounter>
 			<StyledControls>
-				<StyledButton
-				// onClick={() => dispatch({ type: 'increment', id: id })}
-				>
-					+
-				</StyledButton>
-				<StyledButton
-				// onClick={() => dispatch({ type: 'decrement', id: id })}
-				>
-					-
-				</StyledButton>
+				<StyledButton onClick={handleIncrement}>+</StyledButton>
+				<StyledButton onClick={handleDecrement}>-</StyledButton>
 			</StyledControls>
 			{/* <StyledOptions>
 				<h1>options</h1>

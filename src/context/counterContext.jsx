@@ -43,6 +43,11 @@ function reducer(state, action) {
 			);
 			return { counters: state.counters, ...state };
 		case 'create':
+			state.counters.push({ title: 'New counter exmaple', count: 0 });
+			localStorage.setItem(
+				'localCounters',
+				JSON.stringify(state.counters)
+			);
 			return {
 				...state,
 				counters: state.counters,
