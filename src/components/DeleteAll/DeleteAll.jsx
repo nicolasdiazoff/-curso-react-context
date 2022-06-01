@@ -29,7 +29,7 @@ function DeleteAll() {
 	};
 
 	return (
-		<StyledButton onClick={handleDisabled} disabled>
+		<StyledButton onClick={handleDisabled}>
 			Delete all counters
 		</StyledButton>
 	);
