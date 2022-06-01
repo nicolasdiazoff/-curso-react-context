@@ -145,9 +145,11 @@ function CreateScreen() {
 
 	useEffect(() => {
 		dispatch({ type: 'create' });
-		const newCounter = state.counters[state.counters.length - 1];
-		setCounter({ ...newCounter, id: state.counters.length - 1 });
 	}, []);
+
+	useEffect(() => {
+		setCounter({ ...counter, id: state.counters.length });
+	}, [state.counters]);
 
 	return (
 		<Container>

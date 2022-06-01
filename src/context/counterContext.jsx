@@ -55,7 +55,6 @@ function reducer(state, action) {
 			return {
 				...state,
 				counters: state.counters,
-				total: state.counters.length,
 			};
 		case 'reset':
 			let counterRest = state.counters[action.id];
