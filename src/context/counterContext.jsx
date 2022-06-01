@@ -8,18 +8,13 @@ const initialState = {
 
 const countersExample = [
 	{
-		title: 'Counter Example',
+		title: 'Example counter',
 		count: 0,
 		archive: false,
 	},
 	{
-		title: 'Counter Example 2',
-		count: 0,
-		archive: false,
-	},
-	{
-		title: 'Counter Example 3',
-		count: 0,
+		title: 'Example example whit 99',
+		count: 99,
 		archive: false,
 	},
 ];
@@ -55,7 +50,6 @@ function reducer(state, action) {
 			return {
 				...state,
 				counters: state.counters,
-				total: state.counters.length,
 			};
 		case 'reset':
 			let counterRest = state.counters[action.id];
@@ -85,13 +79,11 @@ function reducer(state, action) {
 			return {
 				...state,
 				counters: action.counters,
-				total: action.counters.length,
 			};
 		case 'deleteCounters':
 			return {
-				totalArchives: [],
-				counters: [],
 				...state,
+				counters: [],
 			};
 		default:
 			throw new Error();
