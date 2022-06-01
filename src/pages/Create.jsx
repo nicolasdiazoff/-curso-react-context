@@ -115,6 +115,7 @@ function CreateScreen() {
 	const [counter, setCounter] = useState({
 		title: 'New Counter',
 		count: 0,
+		archive: false,
 	});
 
 	const handleIncrement = () => {
@@ -130,6 +131,16 @@ function CreateScreen() {
 	const handleReset = () => {
 		dispatch({ type: 'reset', id: counter.id });
 		setCounter({ ...counter, count: 0 });
+	};
+
+	const handleArchive = () => {
+		dispatch({ type: 'archive', id: counter.id });
+		setCounter({ ...counter, archive: true });
+	};
+
+	const handleUnArchive = () => {
+		dispatch({ type: 'unarchive', id: counter.id });
+		setCounter({ ...counter, archive: false });
 	};
 
 	useEffect(() => {
@@ -150,10 +161,10 @@ function CreateScreen() {
 			</StyledControls>
 			<StyledOptions>
 				<StyledButtonOptions
-					onClick={() =>
-						dispatch({ type: 'archive', id: counter.id })
+					onClick={
+						!counter.archive ? handleArchive : handleUnArchive
 					}>
-					archive
+					{!counter.archive ? 'archive' : 'unarchive'}
 				</StyledButtonOptions>
 				<StyledButtonOptions onClick={handleReset}>
 					reset

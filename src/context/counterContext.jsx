@@ -3,24 +3,24 @@ import React, { createContext, useEffect, useReducer } from 'react';
 export const CounterContext = createContext();
 
 const initialState = {
-	total: 0,
 	counters: [],
-	totalArchives: 0,
-	archives: [],
 };
 
 const countersExample = [
 	{
 		title: 'Counter Example',
 		count: 0,
+		archive: false,
 	},
 	{
 		title: 'Counter Example 2',
 		count: 0,
+		archive: false,
 	},
 	{
 		title: 'Counter Example 3',
 		count: 0,
+		archive: false,
 	},
 ];
 
@@ -43,7 +43,11 @@ function reducer(state, action) {
 			);
 			return { counters: state.counters, ...state };
 		case 'create':
-			state.counters.push({ title: 'New counter exmaple', count: 0 });
+			state.counters.push({
+				title: 'New counter exmaple',
+				count: 0,
+				archive: false,
+			});
 			localStorage.setItem(
 				'localCounters',
 				JSON.stringify(state.counters)
@@ -61,17 +65,27 @@ function reducer(state, action) {
 				JSON.stringify(state.counters)
 			);
 			return { counters: state.counters, ...state };
+		case 'archive':
+			let counterArchive = state.counters[action.id];
+			counterArchive.archive = true;
+			localStorage.setItem(
+				'localCounters',
+				JSON.stringify(state.counters)
+			);
+			return { counters: state.counters, ...state };
+		case 'unarchive':
+			let counterUnArchive = state.counters[action.id];
+			counterUnArchive.archive = false;
+			localStorage.setItem(
+				'localCounters',
+				JSON.stringify(state.counters)
+			);
+			return { counters: state.counters, ...state };
 		case 'updateCounters':
 			return {
 				...state,
 				counters: action.counters,
 				total: action.counters.length,
-			};
-		case 'updateArchiveCounters':
-			return {
-				...state,
-				archives: action.archives,
-				totalArchives: action.archives.length,
 			};
 		case 'deleteCounters':
 			return {
@@ -100,25 +114,6 @@ export const CounterProvider = (props) => {
 				JSON.stringify(countersExample)
 			);
 			dispatch({ type: 'updateCounters', counters: countersExample });
-		}
-	}, []);
-
-	useEffect(() => {
-		const localcounters = localStorage.getItem('localArchivesCounters');
-		if (localcounters) {
-			dispatch({
-				type: 'updateArchiveCounters',
-				archives: JSON.parse(localcounters),
-			});
-		} else {
-			localStorage.setItem(
-				'localArchiveCounters',
-				JSON.stringify(countersExample)
-			);
-			dispatch({
-				type: 'updateArchiveCounters',
-				archives: countersExample,
-			});
 		}
 	}, []);
 

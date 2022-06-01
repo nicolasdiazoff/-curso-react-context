@@ -6,13 +6,16 @@ import { CounterContext } from '../context/counterContext';
 
 function ArchiveScreen() {
 	const { state } = useContext(CounterContext);
+	const archives = state.counters.filter(
+		(counter) => counter.archive === true
+	);
 	return (
 		<>
-			<Header title={'Archives'} total={state.totalArchives}>
+			<Header title={'Archives'} total={archives.length}>
 				<Link to='/create'>start new</Link>
 				<Link to='/'>see counters</Link>
 			</Header>
-			<ListCounter counters={state.archives} />
+			<ListCounter counters={archives} />
 		</>
 	);
 }
