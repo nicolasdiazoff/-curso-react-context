@@ -11,6 +11,7 @@ const Container = styled.div`
 	width: 100%;
 	height: 100vh;
 	background-color: ${({ theme }) => theme.colors.indigo};
+	position: relative;
 `;
 
 const StyledBigCounter = styled.div`
@@ -76,11 +77,45 @@ const StyledButton = styled.button`
 	margin: 0;
 `;
 
+const StyledOptions = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	margin: 0;
+	position: absolute;
+	box-sizing: border-box;
+	padding-left: 20px;
+	padding-right: 20px;
+	bottom: 20px;
+`;
+
+const StyledButtonOptions = styled.button`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: #6178ea;
+	border-radius: 50px;
+	box-sizing: border-box;
+	border: none;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: ${({ theme }) => theme.colors.white};
+	outline: none;
+	font-size: 20px;
+	font-weight: 600;
+	margin: 0;
+`;
+
 function CreateScreen() {
 	const { state, dispatch } = useContext(CounterContext);
 	const [counter, setCounter] = useState({
 		title: 'New Counter',
 		count: 0,
+		archive: false,
 	});
 
 	const handleIncrement = () => {
@@ -91,6 +126,21 @@ function CreateScreen() {
 	const handleDecrement = () => {
 		setCounter({ ...counter, count: counter.count - 1 });
 		dispatch({ type: 'decrement', id: counter.id });
+	};
+
+	const handleReset = () => {
+		dispatch({ type: 'reset', id: counter.id });
+		setCounter({ ...counter, count: 0 });
+	};
+
+	const handleArchive = () => {
+		dispatch({ type: 'archive', id: counter.id });
+		setCounter({ ...counter, archive: true });
+	};
+
+	const handleUnArchive = () => {
+		dispatch({ type: 'unarchive', id: counter.id });
+		setCounter({ ...counter, archive: false });
 	};
 
 	useEffect(() => {
@@ -109,9 +159,17 @@ function CreateScreen() {
 				<StyledButton onClick={handleIncrement}>+</StyledButton>
 				<StyledButton onClick={handleDecrement}>-</StyledButton>
 			</StyledControls>
-			{/* <StyledOptions>
-				<h1>options</h1>
-			</StyledOptions> */}
+			<StyledOptions>
+				<StyledButtonOptions
+					onClick={
+						!counter.archive ? handleArchive : handleUnArchive
+					}>
+					{!counter.archive ? 'archive' : 'unarchive'}
+				</StyledButtonOptions>
+				<StyledButtonOptions onClick={handleReset}>
+					reset
+				</StyledButtonOptions>
+			</StyledOptions>
 		</Container>
 	);
 }
