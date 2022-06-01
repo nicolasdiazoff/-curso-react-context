@@ -53,6 +53,14 @@ function reducer(state, action) {
 				counters: state.counters,
 				total: state.counters.length,
 			};
+		case 'reset':
+			let counterRest = state.counters[action.id];
+			counterRest.count = 0;
+			localStorage.setItem(
+				'localCounters',
+				JSON.stringify(state.counters)
+			);
+			return { counters: state.counters, ...state };
 		case 'updateCounters':
 			return {
 				...state,
