@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CounterContext } from '../context/counterContext';
@@ -145,7 +146,7 @@ function CreateScreen() {
 
 	useEffect(() => {
 		dispatch({ type: 'create' });
-	}, []);
+	});
 
 	useEffect(() => {
 		setCounter({ ...counter, id: state.counters.length });
